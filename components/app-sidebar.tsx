@@ -33,27 +33,28 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Image from "next/image";
+import { useGetProfile } from "@/hooks/auth";
 
 const data = {
   user: {
-    name: "Gustn Stomy",
+    name: "Guston Stomy",
     email: "gustomstomy@gmail.com",
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
     {
       title: "Dashboard",
-      url: "/",
+      url: "/dashboard",
       icon: IconDashboard,
     },
     {
       title: "Orders ",
-      url: "/orders",
+      url: "/dashboard/orders",
       icon: IconListDetails,
     },
     {
       title: "Product ",
-      url: "/product",
+      url: "/dashboard/product",
       icon: IconChartBar,
     },
     {
@@ -152,6 +153,8 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: profileData } = useGetProfile();
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -181,7 +184,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={profileData?.data?.data} />
       </SidebarFooter>
     </Sidebar>
   );

@@ -20,7 +20,7 @@ export const ReactQueryProvider = ({
   return (
     <QueryClientProvider client={queryClient}>
       {/* Render Toaster only on the client */}
-      {isClient && <Toaster richColors />}
+      {isClient && <Toaster richColors position="top-right" expand={true} />}
       <div>{children}</div>
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>

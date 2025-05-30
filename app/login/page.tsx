@@ -8,6 +8,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
+import { toast } from "sonner";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -82,7 +83,8 @@ export default function LoggedIn() {
           secure: false,
           sameSite: "strict",
         });
-        router.push("/");
+        router.push("/dashboard");
+        toast.success("Login successful!");
       },
       onError: (errorResponse) => {
         console.log("Login error:", errorResponse?.message);

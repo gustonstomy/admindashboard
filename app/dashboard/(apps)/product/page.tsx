@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { DataTable } from "@/components/data-table";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -12,26 +11,25 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IconDotsVertical } from "@tabler/icons-react";
 import { SectionCards } from "@/components/section-cards";
-import { useGetProducts } from "@/hooks/useProducts";
+import { useDeleteProduct, useGetProducts } from "@/hooks/useProducts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { useState } from "react";
-import { useRef } from "react";
 
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 type Product = {
   id: number;
   name: string;
   price: number;
-  stock: number;
+  stock_quantity: number;
   size: string;
   images: { image_url: string }[];
 };
@@ -51,32 +49,34 @@ export default function Page() {
 
   return (
     <div className="p-6 ">
-      <Dialog open={openDelete} onOpenChange={setOpenDelete}>
-        <DialogTrigger asChild></DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
       <div className="flex justify-between ">
         <h1 className="text-2xl font-bold mb-4">Products</h1>
         <Button
-          onClick={() => router.push("/create")}
+          onClick={() => router.push("/dashboard/create")}
           type="button"
-          className="bg-[#B88E2F] p-4 text-white hover:text-black"
+          className="bg-[#B88E2F] p-4 text-white hover:text-[#B88E2F] hover:bg-white hover:border hover:border-[#B88E2F] transition-colors duration-300"
           variant="outline"
         >
           <Plus />
           Add Product
         </Button>
       </div>
-      <div className="@container/main flex flex-1 flex-col gap-2 py-4 md:gap-6 md:py-6 mb-4">
-        <SectionCards />
+      <div className="max-w-md flex flex-1 flex-col gap-2 py-4 md:gap-6 md:py-6 mb-4">
+        <Card className="@container/card">
+          <CardHeader>
+            <CardDescription>Total Products</CardDescription>
+            <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+              {mockProducts?.length || 0}
+            </CardTitle>
+            <CardAction>
+              {/* <Badge variant="outline">
+                <IconTrendingUp />
+                +12.5%
+              </Badge> */}
+            </CardAction>
+          </CardHeader>
+          <CardFooter className="flex-col items-start gap-1.5 text-sm"></CardFooter>
+        </Card>
       </div>
       <div className="overflow-x-scroll w-[310px] lg:w-auto">
         <table className="min-w-full border border-gray-200">
@@ -113,7 +113,7 @@ export default function Page() {
                   ${product?.price}
                 </td>
                 <td className="py-2 px-4 border-b text-center">
-                  {product?.stock}
+                  {product?.stock_quantity || "N/A"}
                 </td>
                 <td className="py-2 px-4 border-b text-center">
                   {product?.size}
@@ -137,32 +137,33 @@ function EditSection({
   id: number;
   setOpenDelete: (open: boolean) => void;
 }) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const router = useRouter();
-  const triggerRef = useRef(null);
+  const deleteProductMutation = useDeleteProduct(id);
+
+  const handleDelete = () => {
+    deleteProductMutation.mutate();
+  };
+
   return (
-    <DropdownMenu
-      open={dropdownOpen}
-      onOpenChange={setDropdownOpen}
-      modal={false}
-    >
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          ref={triggerRef}
           variant="ghost"
           className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
           size="icon"
-          onClick={() => setDropdownOpen(!dropdownOpen)}
         >
           <IconDotsVertical />
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-32">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => router.push(`/product-details?id=${id}`)}
+          onClick={() => router.push(`/dashboard/update/${id}`)}
+        >
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => router.push(`/dashboard/product-details/${id}`)}
           className="cursor-pointer"
         >
           View details
@@ -170,10 +171,7 @@ function EditSection({
         {/* <DropdownMenuItem>Favorite</DropdownMenuItem> */}
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem
-          variant="destructive"
-          onClick={() => setOpenDelete(true)}
-        >
+        <DropdownMenuItem variant="destructive" onClick={handleDelete}>
           Delete
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -10,91 +10,139 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export function SectionCards() {
+export function SectionCards({ data }: { data: DashboardSummary }) {
   return (
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Total Revenue</CardDescription>
+          <CardDescription>Toatal Revenue </CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            $1,250.00
+            {data?.totalRevenue?.total || 0}
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
-              <IconTrendingUp />
-              +12.5%
+              {data?.totalRevenue?.progression === "up" ? (
+                <div className="flex items-center gap-1">
+                  <IconTrendingUp className="size-4" />+
+                </div>
+              ) : data?.totalRevenue?.progression === "down" ? (
+                <div className="flex items-center gap-1">
+                  <IconTrendingDown />-
+                </div>
+              ) : null}
+              {data?.totalRevenue?.percentage_change}%
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            Trending up this month <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Visitors for the last 6 months
+            {data?.totalRevenue?.progression + " "}
+            {data?.totalRevenue?.percentage_change}% this period{" "}
+            {data?.totalRevenue?.progression === "up" ? (
+              <IconTrendingUp className="size-4" />
+            ) : data?.totalRevenue?.progression === "down" ? (
+              <IconTrendingDown className="size-4" />
+            ) : null}
           </div>
         </CardFooter>
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Total Products </CardDescription>
+          <CardDescription>Toatal Orders </CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            1,234
+            {data?.totalOrders?.total || 0}
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
-              <IconTrendingDown />
-              -20%
+              {data?.totalOrders?.progression === "up" ? (
+                <div className="flex items-center gap-1">
+                  <IconTrendingUp className="size-4" />+
+                </div>
+              ) : data?.totalOrders?.progression === "down" ? (
+                <div className="flex items-center gap-1">
+                  <IconTrendingDown />-
+                </div>
+              ) : null}
+              {data?.totalOrders?.percentage_change}%
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            Down 20% this period <IconTrendingDown className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Acquisition needs attention
+            {data?.totalOrders?.progression + " "}
+            {data?.totalOrders?.percentage_change}% this period{" "}
+            {data?.totalOrders?.progression === "up" ? (
+              <IconTrendingUp className="size-4" />
+            ) : data?.totalOrders?.progression === "down" ? (
+              <IconTrendingDown className="size-4" />
+            ) : null}
           </div>
         </CardFooter>
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Active Accounts</CardDescription>
+          <CardDescription>Toatal Products </CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            45,678
+            {data?.totalProducts?.total || 0}
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
-              <IconTrendingUp />
-              +12.5%
+              {data?.totalProducts?.progression === "up" ? (
+                <div className="flex items-center gap-1">
+                  <IconTrendingUp className="size-4" />+
+                </div>
+              ) : data?.totalProducts?.progression === "down" ? (
+                <div className="flex items-center gap-1">
+                  <IconTrendingDown />-
+                </div>
+              ) : null}
+              {data?.totalProducts?.percentage_change}%
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            Strong user retention <IconTrendingUp className="size-4" />
+            {data?.totalProducts?.progression + " "}
+            {data?.totalProducts?.percentage_change}% this period{" "}
+            {data?.totalProducts?.progression === "up" ? (
+              <IconTrendingUp className="size-4" />
+            ) : data?.totalProducts?.progression === "down" ? (
+              <IconTrendingDown className="size-4" />
+            ) : null}
           </div>
-          <div className="text-muted-foreground">Engagement exceed targets</div>
         </CardFooter>
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Total Orders </CardDescription>
+          <CardDescription>Toatal Users </CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            51
+            {data?.totalUsers?.total || 0}
           </CardTitle>
           <CardAction>
             <Badge variant="outline">
-              <IconTrendingUp />
-              +4.5%
+              {data?.totalUsers?.progression === "up" ? (
+                <div className="flex items-center gap-1">
+                  <IconTrendingUp className="size-4" />+
+                </div>
+              ) : data?.totalUsers?.progression === "down" ? (
+                <div className="flex items-center gap-1">
+                  <IconTrendingDown />-
+                </div>
+              ) : null}
+              {data?.totalUsers?.percentage_change}%
             </Badge>
           </CardAction>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            Steady performance increase <IconTrendingUp className="size-4" />
+            {data?.totalUsers?.progression + " "}
+            {data?.totalUsers?.percentage_change}% this period{" "}
+            {data?.totalUsers?.progression === "up" ? (
+              <IconTrendingUp className="size-4" />
+            ) : data?.totalUsers?.progression === "down" ? (
+              <IconTrendingDown className="size-4" />
+            ) : null}
           </div>
-          <div className="text-muted-foreground">Meets growth projections</div>
         </CardFooter>
       </Card>
     </div>

@@ -27,7 +27,7 @@ export default function CreateProductPage() {
     width: "",
     height: "",
     weight: "",
-    sku: "",
+    stock_quantity: "",
   });
 
   const [images, setImages] = useState<ImageInput[]>(initialImageInputs);
@@ -149,7 +149,7 @@ export default function CreateProductPage() {
         width: "",
         height: "",
         weight: "",
-        sku: "",
+        stock_quantity: "",
       });
       setImages(initialImageInputs);
     } catch (err: any) {
@@ -232,9 +232,9 @@ export default function CreateProductPage() {
             className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <input
-            name="currency"
-            placeholder="Currency"
-            value={form.currency}
+            name="stock_quantity"
+            placeholder="Stock Quantity"
+            value={form.stock_quantity}
             onChange={handleChange}
             required
             className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -267,13 +267,6 @@ export default function CreateProductPage() {
             step="0.01"
             placeholder="Weight"
             value={form.weight}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-          <input
-            name="sku"
-            placeholder="SKU"
-            value={form.sku}
             onChange={handleChange}
             className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />

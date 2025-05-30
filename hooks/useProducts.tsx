@@ -67,7 +67,7 @@ const createProduct = async (payload: {
   width: number;
   height: number;
   weight: number;
-  sku: string;
+  stock_quantity: string;
   images: {};
 }) => {
   const { data } = await axiosInstance.post(
@@ -94,9 +94,9 @@ export function useCreateProduct() {
   });
 }
 
-const updateProduct = async (id: number, payload: {}) => {
-  const { data } = await axiosInstance.put(
-    endpoints.product.GET_PRODUCTDETAILS(id),
+const updateProduct = async (id: string, payload: {}) => {
+  const { data } = await axiosInstance.patch(
+    endpoints.product.UPDATE_PRODUCT(id),
     payload,
     {
       headers: {
@@ -107,12 +107,12 @@ const updateProduct = async (id: number, payload: {}) => {
   );
   return data;
 };
-export function useUpdateProduct(id: number) {
+export function useUpdateProduct(id: string) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: {}) => updateProduct(id, payload),
     onSuccess: () => {
-      toast("Product updated successfully!");
+      toast.success("Product updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["productDetails", id] });
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },

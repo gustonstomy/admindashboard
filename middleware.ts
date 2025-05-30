@@ -48,7 +48,18 @@ export function middleware(request: NextRequest) {
   // If user is authenticated and trying to access public routes (login, register, etc.)
   // redirect them to the home page or dashboard
   if (isAuthenticated && isPublicRoute) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  if (pathname === "/") {
+    if (isAuthenticated) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    } else if (!isAuthenticated) {
+      // Store the original URL to redirect back after login
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("from", pathname);
+      return NextResponse.redirect(loginUrl);
+    }
   }
 
   // If user is not authenticated and trying to access protected routes
@@ -68,7 +79,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Match all routes except static files and API routes
   matcher: [
-    "/",
+    "/dashboard/:path*", // Match all dashboard routes
     /*
      * Match all request paths except for the ones starting with:
      * - api (API routes)

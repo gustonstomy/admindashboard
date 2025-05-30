@@ -4,7 +4,6 @@ import "./globals.css";
 import { ReactQueryProvider } from "@/components/QueryProvider";
 import Layout from "@/components/layout";
 import ClientHydrationWrapper from "./hydrationWrapper";
-import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,12 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClientHydrationWrapper>
-          <ReactQueryProvider>
-            <Toaster />
-            <Layout children={children} />
-          </ReactQueryProvider>
-        </ClientHydrationWrapper>
+        {/* <Layout /> */}
+        {/* <ClientHydrationWrapper> */}
+
+        <ReactQueryProvider>{children}</ReactQueryProvider>
+        {/* </ClientHydrationWrapper> */}
       </body>
     </html>
   );

@@ -11,7 +11,7 @@ const signUp = async (payload: {
   phone: string;
   date_of_birth: string;
 }) => {
-  const { data } = await axiosInstance.post(endpoints.SIGNUP, payload, {
+  const { data } = await axiosInstance.post(endpoints.auth.SIGNUP, payload, {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
@@ -52,7 +52,7 @@ const updateProfile = async (
   id: string
 ) => {
   const { data } = await axiosInstance.patch(
-    endpoints.UPDATE_PROFILE(id),
+    endpoints.profile.UPDATE_PROFILE(id),
     payload,
     {
       headers: {
@@ -81,7 +81,7 @@ export function useUpdateProfile(id: string) {
 }
 
 const getProfile = async () => {
-  const data = await axiosInstance.get(endpoints.GET_PROFILE, {
+  const data = await axiosInstance.get(endpoints.profile.GET_PROFILE, {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",

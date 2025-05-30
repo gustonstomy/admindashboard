@@ -2,7 +2,6 @@
 
 import { IconCirclePlusFilled, IconMail, type Icon } from "@tabler/icons-react";
 
-import { Button } from "@/components/ui/button";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -10,6 +9,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Button } from "./ui/button";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export function NavMain({
   items,
@@ -20,6 +22,8 @@ export function NavMain({
     icon?: Icon;
   }[];
 }) {
+  const pathName = usePathname();
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -43,16 +47,24 @@ export function NavMain({
           </SidebarMenuItem>
         </SidebarMenu> */}
         <SidebarMenu>
-          {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <a href={item.url}>
-                <SidebarMenuButton tooltip={item.title}>
-                  {item.icon && <item.icon />}
-                  <span>{item.title}</span>
-                </SidebarMenuButton>
-              </a>
-            </SidebarMenuItem>
-          ))}
+          {items.map((item) => {
+            const isActive = pathName === item.url;
+            return (
+              <SidebarMenuItem
+                key={item.title}
+                className={`${
+                  isActive ? "bg-primary text-secondary rounded-sm" : ""
+                } `}
+              >
+                <Link href={item.url}>
+                  <SidebarMenuButton tooltip={item.title}>
+                    {item.icon && <item.icon />}
+                    <span>{item.title}</span>
+                  </SidebarMenuButton>
+                </Link>
+              </SidebarMenuItem>
+            );
+          })}
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
