@@ -225,12 +225,24 @@ function UserDetailsSheet({
       <SheetContent>
         <SheetHeader>
           <SheetTitle>User details</SheetTitle>
-          <SheetDescription>
+          <SheetDescription></SheetDescription>
+        </SheetHeader>
+        <div className="flex flex-col gap-8 mt-8 px-4">
+          {isLoading ? (
             <div className="flex flex-col gap-8 mt-8">
+              <div className="flex w-[200px] h-[200px]  bg-gray-200 rounded-lg"></div>
+              <div className="flex border p-2 bg-gray-200 text-black font-medium text-sm rounded-lg"></div>
+              <div className="flex border p-2 bg-gray-200 text-black font-medium text-sm rounded-lg"></div>
+              <div className="flex border p-2 bg-gray-200 text-black font-medium text-sm rounded-lg"></div>
+              <div className="flex border p-2 bg-gray-200 text-black font-medium text-sm rounded-lg"></div>
+              <div className="flex border p-2 bg-gray-200 text-black font-medium text-sm rounded-lg"></div>
+            </div>
+          ) : (
+            <>
               <div className="flex w-[200px] h-[200px]  bg-gray-200 rounded-lg">
                 <Image
-                  src={userDetails?.image}
-                  alt={userDetails?.name}
+                  src={userDetails?.image ?? "/"}
+                  alt={userDetails?.name ?? "user"}
                   width={200}
                   height={200}
                   className="object-cover rounded-lg"
@@ -251,9 +263,9 @@ function UserDetailsSheet({
               <div className="flex border p-2 bg-gray-200 text-black font-medium text-sm rounded-lg">
                 {formatDate(userDetails?.last_seen ?? "")}
               </div>
-            </div>
-          </SheetDescription>
-        </SheetHeader>
+            </>
+          )}
+        </div>
       </SheetContent>
     </Sheet>
   );

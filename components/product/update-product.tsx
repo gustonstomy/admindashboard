@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { X, Upload, ImageIcon } from "lucide-react";
 import {
   useCreateProduct,
-  useGetCategory,
   useGetProductDetails,
   useUpdateProduct,
 } from "@/hooks/useProducts";
 import { toast } from "sonner";
+import { useGetCategory } from "@/hooks/useCategory";
 
 type ImageInput = {
   image: File | null;

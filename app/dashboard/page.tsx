@@ -19,7 +19,6 @@ export default function Page() {
   const allCartData: DashboardSummary = chartData?.data?.data || [];
   const userData: User = tableData?.data?.data?.list || [];
 
-  console.log("Table Data", userData);
   return (
     <div className="flex flex-1 flex-col">
       <div className="@container/main flex flex-1 flex-col gap-2">
