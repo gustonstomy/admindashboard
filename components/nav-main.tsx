@@ -53,7 +53,7 @@ export function NavMain({
               <SidebarMenuItem
                 key={item.title}
                 className={`${
-                  isActive ? "bg-primary text-secondary rounded-sm" : ""
+                  isActive ? "bg-primary text-secondary text-xl rounded-sm" : ""
                 } `}
               >
                 <Link href={item.url}>

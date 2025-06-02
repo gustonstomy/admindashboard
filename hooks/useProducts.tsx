@@ -40,23 +40,6 @@ export function useGetProductDetails(id: number) {
   });
 }
 
-const getCategory = async () => {
-  const data = await axiosInstance.get(endpoints.category.GET_CATEGORY, {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  });
-  return data;
-};
-
-export function useGetCategory() {
-  return useQuery({
-    queryKey: ["category"],
-    queryFn: getCategory,
-  });
-}
-
 const createProduct = async (payload: {
   name: string;
   description: string;

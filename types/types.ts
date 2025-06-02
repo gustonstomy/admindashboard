@@ -35,3 +35,20 @@ type User = {
   status: "active" | "inactive";
   last_seen: Date;
 };
+
+type UserStatsData = {
+  totalUsers: {
+    total: number;
+    percentage_change: number;
+    progression: "up" | "down";
+  };
+  totalActiveUsers: {
+    total_active_users: number;
+  };
+  totalInactiveUsers: {
+    total_inactive_users: number;
+  };
+  totalBannedUsers: {
+    total_banned_users: number;
+  };
+};

@@ -17,6 +17,8 @@ export const endpoints = {
   category: {
     GET_CATEGORY: "/api/v1/admin/category",
     CREATE_CATEGORY: "/api/v1/admin/category",
+    UPDATE_CATEGORY: (id: string) => `/api/v1/admin/category/${id}`,
+    DELETE_CATEGORY: (id: number) => `/api/v1/admin/category/${id}`,
   },
 
   order: {
@@ -32,5 +34,11 @@ export const endpoints = {
   dashboard: {
     GET_DASHBOARD_SUMMARY: "/api/v1/admin/dashboard",
     GET_DASHBOARD_CHART: "/api/v1/admin/dashboard/users",
+  },
+  user: {
+    GET_USERS: "/api/v1/admin/users/",
+    GET_USER_DETAILS: (id: string) => `/api/v1/admin/users/${id}`,
+    USER_SUMMARY: `/api/v1/admin/users/summary`,
+    DELETE_USER: (id: number) => `/api/v1/admin/users/${id}/ban`,
   },
 };

@@ -59,8 +59,18 @@ const data = {
     },
     {
       title: "Category",
-      url: "#",
+      url: "/dashboard/create-category",
       icon: IconFolder,
+    },
+    {
+      title: "Users",
+      url: "/dashboard/users",
+      icon: IconListDetails,
+    },
+    {
+      title: "Admin users",
+      url: "/dashboard/admin-user",
+      icon: IconListDetails,
     },
     // {
     //   title: "Team",
