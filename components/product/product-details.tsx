@@ -79,10 +79,10 @@ export default function ProductDetails({ id }: { id: string }) {
           <div className="relative aspect-square rounded-2xl overflow-hidden bg-white shadow-2xl border border-gray-100">
             <img
               src={sortedImages[selectedImageIndex]?.image_url}
-              alt={productData.name}
+              alt={productData?.name}
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             />
-            {productData.is_out_of_stock && (
+            {productData?.is_out_of_stock && (
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                 <span className="bg-red-500 text-white px-6 py-2 rounded-full font-semibold text-lg">
                   Out of Stock
@@ -106,7 +106,7 @@ export default function ProductDetails({ id }: { id: string }) {
                 >
                   <img
                     src={image.image_url}
-                    alt={`${productData.name} ${index + 1}`}
+                    alt={`${productData?.name} ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
                 </button>
@@ -122,10 +122,10 @@ export default function ProductDetails({ id }: { id: string }) {
             <div className="flex items-start justify-between mb-2">
               <div>
                 <span className="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full mb-3 capitalize">
-                  {productData.category.name}
+                  {productData?.category?.name}
                 </span>
                 <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                  {productData.name}
+                  {productData?.name}
                 </h1>
               </div>
             </div>
@@ -133,7 +133,7 @@ export default function ProductDetails({ id }: { id: string }) {
             <div className="flex items-center space-x-4 mb-4">
               <span className="text-gray-400">•</span>
               <span className="text-sm text-gray-600">
-                SKU: {productData.sku}
+                SKU: {productData?.sku}
               </span>
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function ProductDetails({ id }: { id: string }) {
           {/* Price */}
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
             <div className="text-4xl font-bold text-gray-900 mb-2">
-              {formatPrice(productData.price, productData.currency)}
+              {formatPrice(productData?.price, productData?.currency)}
             </div>
             <p className="text-gray-600">Inclusive of all taxes</p>
           </div>
@@ -152,7 +152,7 @@ export default function ProductDetails({ id }: { id: string }) {
               Description
             </h3>
             <p className="text-gray-700 leading-relaxed">
-              {productData.description}
+              {productData?.description}
             </p>
           </div>
 
@@ -166,7 +166,7 @@ export default function ProductDetails({ id }: { id: string }) {
                 <Package className="w-5 h-5 text-blue-500" />
                 <div>
                   <span className="text-sm text-gray-500">Size</span>
-                  <p className="font-medium">{productData.size}</p>
+                  <p className="font-medium">{productData?.size}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -174,7 +174,7 @@ export default function ProductDetails({ id }: { id: string }) {
                 <div>
                   <span className="text-sm text-gray-500">Dimensions</span>
                   <p className="font-medium">
-                    {productData.width}" × {productData.height}"
+                    {productData?.width}" × {productData?.height}"
                   </p>
                 </div>
               </div>

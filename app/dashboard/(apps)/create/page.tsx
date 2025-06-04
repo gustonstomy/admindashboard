@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { X, Upload, ImageIcon } from "lucide-react";
-import { useCreateProduct, useGetCategory } from "@/hooks/useProducts";
+import { useCreateProduct } from "@/hooks/useProducts";
 import { toast } from "sonner";
+import { useGetCategory } from "@/hooks/useCategory";
 
 type ImageInput = {
   image: File | null;
